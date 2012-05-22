@@ -73,7 +73,7 @@ rb_ds_playlist_new (VALUE self, VALUE sessionv, VALUE id)
 	if (strlen(playlist_id) != 34)
 		return Qnil;
 
-	pl = despotify_get_playlist(session->real, playlist_id);
+	pl = despotify_get_playlist(session->real, playlist_id, 0);
 	if (!pl)
 		return Qnil;
 
