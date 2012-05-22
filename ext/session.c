@@ -64,7 +64,7 @@ rb_ds_session_new (VALUE self)
 	rb_ds_session *session;
 	VALUE2SESSION(self, session);
 
-	if (!(session->real = despotify_init_client(rb_ds_session_callback, (void *) self))) {
+	if (!(session->real = despotify_init_client(rb_ds_session_callback, (void *) self, 0, 0))) {
 		rb_raise(rb_eNoMemError, "failed to allocate memory");
 		return Qnil;
 	}
