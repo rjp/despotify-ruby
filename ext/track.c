@@ -96,9 +96,17 @@ rb_ds_track_metadata (VALUE self)
 		VALUE metadata = rb_hash_new();
 		VALUE artists = rb_ary_new();
 		ds_artist_t *a;
+		VALUE external_ids = rb_hash_new();
+		ds_external_id_t *i;
 
 		for (a = track->real->artist; a; a = a->next) {
 			rb_ary_push(artists, ARTIST2VALUE(a));
+		}
+
+		for (i = track->real->external_ids; i; i = i->next) {
+            HASH_VALUE_ADD(external_ids,
+                rb_str_new2(i->type), rb_str_new2(i->value)
+            );
 		}
 
 		HASH_VALUE_ADD(metadata, "id", rb_str_new2(track->real->track_id));
@@ -113,11 +121,12 @@ rb_ds_track_metadata (VALUE self)
 		HASH_VALUE_ADD(metadata, "cover_id", rb_str_new2(track->real->cover_id));
 		HASH_VALUE_ADD(metadata, "playable", BOOL2VALUE(track->real->playable));
 		HASH_VALUE_ADD(metadata, "popularity", rb_float_new(track->real->popularity));
+		HASH_VALUE_ADD(metadata, "external_ids", external_ids);
 
 		rb_iv_set(self, "metadata", metadata);
 	}
 
-	return rb_iv_get(self, "metadata");
+    return rb_iv_get(self, "metadata");
 }
 
 static VALUE
@@ -127,8 +136,7 @@ rb_ds_track_lookup (VALUE self, VALUE key)
 	VALUE metadata;
 
 	metadata = rb_ds_track_metadata(self);
-
-	return rb_hash_aref(metadata, key);
+    return rb_hash_aref(metadata, key);
 }
 
 static VALUE
