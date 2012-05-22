@@ -5,16 +5,16 @@
 #ifndef __RB_DESPOTIFY_H
 #define __RB_DESPOTIFY_H
 
-VALUE cAlbum;
-VALUE cAlbumBrowse;
-VALUE cArtist;
-VALUE cArtistBrowse;
-VALUE cPlaylist;
-VALUE cSearch;
-VALUE cSession;
-VALUE cTrack;
+extern VALUE cAlbum;
+extern VALUE cAlbumBrowse;
+extern VALUE cArtist;
+extern VALUE cArtistBrowse;
+extern VALUE cPlaylist;
+extern VALUE cSearch;
+extern VALUE cSession;
+extern VALUE cTrack;
 
-VALUE eDespotifyError;
+extern VALUE eDespotifyError;
 
 typedef struct album ds_album_t;
 typedef struct album_browse ds_album_browse_t;

@@ -15,6 +15,19 @@
 #include "session.h"
 #include "track.h"
 
+/* We can't define these in main.h because it leads to conflicting symbols
+   when linking because everyone includes main.h. Move them here and slap
+   extern on the references in main.h to cover this. - rjp */
+VALUE cAlbum;
+VALUE cAlbumBrowse;
+VALUE cArtist;
+VALUE cArtistBrowse;
+VALUE cPlaylist;
+VALUE cSearch;
+VALUE cSession;
+VALUE cTrack;
+
+VALUE eDespotifyError;
 
 static VALUE
 rb_despotify_id2uri (VALUE self, VALUE idv)
