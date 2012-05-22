@@ -104,9 +104,7 @@ rb_ds_track_metadata (VALUE self)
 		}
 
 		for (i = track->real->external_ids; i; i = i->next) {
-            HASH_VALUE_ADD(external_ids,
-                rb_str_new2(i->type), rb_str_new2(i->value)
-            );
+            HASH_VALUE_ADD(external_ids, i->type, rb_str_new2(i->value));
 		}
 
 		HASH_VALUE_ADD(metadata, "id", rb_str_new2(track->real->track_id));
