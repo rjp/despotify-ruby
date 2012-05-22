@@ -42,6 +42,12 @@ rb_despotify_uri2id (VALUE self, VALUE uriv)
 	return rb_str_new2(buf);
 }
 
+/* dunno when this changed but this works for old and new libdespotify
+   - rjp */
+#ifndef DESPOTIFY_TRACK_CHANGE
+#define DESPOTIFY_TRACK_CHANGE DESPOTIFY_NEW_TRACK
+#endif
+
 void
 Init_despotify (void)
 {
