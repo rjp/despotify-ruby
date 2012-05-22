@@ -340,6 +340,10 @@ rb_ds_session_signal (VALUE self, VALUE signal)
 	return self;
 }
 
+#ifndef RARRAY_LEN /* ruby 1.8 */
+#define RARRAY_LEN(x) RARRAY(x)->len
+#endif
+
 static void
 rb_ds_session_callback (ds_session_t *session, int signal,
                         void *data, void *udata)
@@ -370,7 +374,7 @@ rb_ds_session_callback (ds_session_t *session, int signal,
 			break;
 	}
 
-	for (i = 0; i < RARRAY(callbacks)->len; i++) {
+	for (i = 0; i < RARRAY_LEN(callbacks); i++) {
 		callback = rb_ary_entry(callbacks, i);
 
 		if (hasdata > 0)
