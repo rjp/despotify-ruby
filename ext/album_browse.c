@@ -109,12 +109,19 @@ rb_ds_album_browse_metadata(VALUE self) {
 	if (rb_iv_get(self, "metadata") == Qnil) {
 		VALUE metadata = rb_hash_new();
 
+		VALUE external_ids = rb_hash_new();
+		ds_external_id_t *i;
+
+		for (i = album->real->external_ids; i; i = i->next) {
+            HASH_VALUE_ADD(external_ids, i->type, rb_str_new2(i->value));
+		}
 		HASH_VALUE_ADD(metadata, "name", rb_str_new2(album->real->name));
 		HASH_VALUE_ADD(metadata, "id", rb_str_new2(album->real->id));
 		HASH_VALUE_ADD(metadata, "num_tracks", INT2FIX(album->real->num_tracks));
 		HASH_VALUE_ADD(metadata, "year", INT2FIX(album->real->year));
 		HASH_VALUE_ADD(metadata, "cover_id", rb_str_new2(album->real->cover_id));
 		HASH_VALUE_ADD(metadata, "popularity", rb_float_new(album->real->popularity));
+		HASH_VALUE_ADD(metadata, "external_ids", external_ids);
 
 		rb_iv_set(self, "metadata", metadata);
 	}
