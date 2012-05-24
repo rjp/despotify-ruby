@@ -11,7 +11,7 @@ typedef struct {
 
 
 VALUE Init_ArtistBrowse (VALUE mDespotify);
-VALUE ARTISTBROWS2VALUE (ds_artist_browse_t *a);
+VALUE ARTISTBROWSE2VALUE (ds_artist_browse_t *a);
 
 #define VALUE2ARTISTBROWSE(obj, var) \
 	Data_Get_Struct ((obj), rb_ds_artist_browse, (var))

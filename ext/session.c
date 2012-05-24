@@ -281,7 +281,7 @@ rb_ds_session_uri (VALUE self, VALUE uri)
 
 		case LINK_TYPE_ARTIST:
 			rval = ARTISTBROWSE2VALUE(despotify_link_get_artist(
-			                          session->real, link), false);
+			                          session->real, link));
 			break;
 
 		case LINK_TYPE_PLAYLIST:
